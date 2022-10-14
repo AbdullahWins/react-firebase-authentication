@@ -1,4 +1,5 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   getAuth,
   signInWithPopup,
@@ -8,6 +9,8 @@ import {
 } from "firebase/auth";
 import firebaseApp from "./firebaseConfig/firebaseConfig";
 import { useState } from "react";
+import Register from "./components/Register/Register";
+import RegisterBootstrap from "./components/RegisterBootstrap/RegisterBootstrap";
 
 const auth = getAuth(firebaseApp);
 
@@ -15,20 +18,6 @@ function App() {
   const [user, setUser] = useState({});
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
-
-  const handleRegister = (event) => {
-    event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    console.log(email, password);
-  };
-
-  const handleEmailOnBlur = (event) => {
-    console.log(event.target.value);
-  };
-  const handlePasswordOnBlur = (event) => {
-    console.log(event.target.value);
-  };
 
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, googleProvider)
@@ -81,27 +70,8 @@ function App() {
           <img src={user.photoURL} alt="" />
         </section>
       )}
-      <form onSubmit={handleRegister}>
-        <input
-          onBlur={handleEmailOnBlur}
-          type="email"
-          name="email"
-          id=""
-          placeholder="Your Email"
-        />
-        <br />
-        <input
-          onBlur={handlePasswordOnBlur}
-          type="password"
-          name="password"
-          id=""
-          placeholder="Your Password"
-        />
-        <br />
-        agree to our terms and conditions
-        <br />
-        <button type="submit">Register</button>
-      </form>
+      <Register></Register>
+      <RegisterBootstrap></RegisterBootstrap>
     </div>
   );
 }
