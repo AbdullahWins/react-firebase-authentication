@@ -16,6 +16,20 @@ function App() {
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(email, password);
+  };
+
+  const handleEmailOnBlur = (event) => {
+    console.log(event.target.value);
+  };
+  const handlePasswordOnBlur = (event) => {
+    console.log(event.target.value);
+  };
+
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
@@ -67,6 +81,27 @@ function App() {
           <img src={user.photoURL} alt="" />
         </section>
       )}
+      <form onSubmit={handleRegister}>
+        <input
+          onBlur={handleEmailOnBlur}
+          type="email"
+          name="email"
+          id=""
+          placeholder="Your Email"
+        />
+        <br />
+        <input
+          onBlur={handlePasswordOnBlur}
+          type="password"
+          name="password"
+          id=""
+          placeholder="Your Password"
+        />
+        <br />
+        agree to our terms and conditions
+        <br />
+        <button type="submit">Register</button>
+      </form>
     </div>
   );
 }
